@@ -1,0 +1,2 @@
+instant_sapling_growth.grow_everywhere (Whether to grow the sapling everywhere or on proper soil only) bool false
+instant_sapling_growth.light_limitations (Whether will saplings grow only in daytime or not) bool true
