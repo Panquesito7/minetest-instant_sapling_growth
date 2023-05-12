@@ -39,6 +39,16 @@ instant_sapling_growth = {
     }
 }
 
+------------------
+-- Privileges --
+------------------
+
+minetest.register_privilege("sapling_growth", {
+		description = "Allows the player to instantly grow a sapling when placed",
+		give_to_singleplayer = true,
+		give_to_admin = false
+})
+
 --------------------------
 -- Other saplings mods --
 --------------------------
@@ -217,8 +227,8 @@ local function grow_sapling(pos)
     end
 end
 
--- Taken from from cornernote's Minetest Skyblock
--- mod instant sapling growth. Thanks!
+-- Taken and slightly modified from from cornernote's
+-- Minetest Skyblock mod instant sapling growth. Thanks!
 -- https://github.com/cornernote/minetest-skyblock/blob/HEAD/skyblock_levels/register_node.lua#L61
 minetest.register_on_mods_loaded(function()
     for _,node in pairs(instant_sapling_growth.saplings) do
@@ -230,7 +240,9 @@ minetest.register_on_mods_loaded(function()
                 --
                 -- However, if the bush is not in growing conditions, we must turn it back to a
                 -- fruitless bush and not place the bush with its fruit.
-                if string.find(node, "bushes") and not can_grow(pos) then
+                if (string.find(node, "bushes") and not can_grow(pos))
+					or (minetest.check_player_privs(placer:get_player_name(), { sapling_growth = false })) then
+
                     return old_after_place_node(pos, placer, itemstack)
                 end
 
