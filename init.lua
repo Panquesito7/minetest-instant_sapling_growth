@@ -22,21 +22,7 @@ local modname = minetest.get_current_modname()
 local modpath = minetest.get_modpath(modname)
 
 instant_sapling_growth = {
-    -- MTG saplings/bushes.
-    saplings = {
-        "default:sapling",
-        "default:junglesapling",
-        "default:emergent_jungle_sapling",
-        "default:pine_sapling",
-        "default:acacia_sapling",
-        "default:aspen_sapling",
-
-        -- Bushes.
-        "default:bush_sapling",
-        "default:blueberry_bush_sapling",
-        "default:acacia_bush_sapling",
-        "default:pine_bush_sapling",
-    }
+    saplings = { }
 }
 
 ------------------
@@ -49,14 +35,15 @@ minetest.register_privilege("sapling_growth", {
 		give_to_admin = false
 })
 
---------------------------
--- Other saplings mods --
---------------------------
+----------------------
+-- Saplings mods --
+----------------------
 
+dofile(modpath .. "/default.lua")       -- Default
 dofile(modpath .. "/cool_trees.lua")    -- Cool Trees
 dofile(modpath .. "/ethereal.lua")      -- Ethereal
 dofile(modpath .. "/maple.lua")         -- Maple Tree
-dofile(modpath .. "/moretrees.lua")     -- More Trees
+dofile(modpath .. "/moretrees.lua")     -- More Trees!
 dofile(modpath .. "/plantlife.lua")     -- Plantlife
 
 ----------------------

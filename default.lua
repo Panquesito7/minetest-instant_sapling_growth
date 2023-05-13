@@ -1,5 +1,5 @@
 --[[
-    Support for the Plantlife Modpack.
+    Support for the `default` mod (included in MTG).
 
     Copyright (C) 2023 David Leal (halfpacho@gmail.com)
     Copyright (C) Various other Minetest developers/contributors
@@ -20,24 +20,20 @@
 
 local saplings = instant_sapling_growth.saplings
 local list = {
-    "ferns:sapling_tree_fern",
-    "ferns:sapling_giant_tree_fern",
-    "dryplants:reedmace_sapling",
-    "bushes:blueberry_bush",
-    "bushes:raspberry_bush",
-    "bushes:blackberry_bush",
-    "bushes:gooseberry_bush",
-    "bushes:strawberry_bush"
+    "default:sapling",
+    "default:junglesapling",
+    "default:emergent_jungle_sapling",
+    "default:pine_sapling",
+    "default:acacia_sapling",
+    "default:aspen_sapling",
+    "default:bush_sapling",
+    "default:blueberry_bush_sapling",
+    "default:acacia_bush_sapling",
+    "default:pine_bush_sapling",
 }
 
 for _,k in pairs(list) do
-    local modname = k:split(":")[1]
-
-    if modname == "bushes" then
-        modname = "bushes_classic"
-    end
-
-    if minetest.get_modpath(modname) and minetest.registered_nodes[k] then
+    if minetest.get_modpath("default") and minetest.registered_nodes[k] then
         table.insert(saplings, k)
     end
 end

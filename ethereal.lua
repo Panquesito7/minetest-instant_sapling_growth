@@ -19,36 +19,26 @@
 --]]
 
 local saplings = instant_sapling_growth.saplings
+local list = {
+    "ethereal:willow_sapling",
+    "ethereal:yellow_tree_sapling",
+    "ethereal:big_tree_sapling",
+    "ethereal:banana_tree_sapling",
+    "ethereal:frost_tree_sapling",
+    "ethereal:mushroom_sapling",
+    "ethereal:palm_sapling",
+    "ethereal:giant_redwood_sapling",
+    "ethereal:redwood_sapling",
+    "ethereal:orange_tree_sapling",
+    "ethereal:birch_sapling",
+    "ethereal:sakura_sapling",
+    "ethereal:lemon_tree_sapling",
+    "ethereal:olive_tree_sapling",
+    "ethereal:bamboo_sprout"
+}
 
-if minetest.get_modpath("ethereal") and minetest.registered_nodes["ethereal:willow_sapling"]
-    and minetest.registered_nodes["ethereal:yellow_tree_sapling"]
-    and minetest.registered_nodes["ethereal:big_tree_sapling"]
-    and minetest.registered_nodes["ethereal:banana_tree_sapling"]
-    and minetest.registered_nodes["ethereal:frost_tree_sapling"]
-    and minetest.registered_nodes["ethereal:mushroom_sapling"]
-    and minetest.registered_nodes["ethereal:palm_sapling"]
-    and minetest.registered_nodes["ethereal:giant_redwood_sapling"]
-    and minetest.registered_nodes["ethereal:redwood_sapling"]
-    and minetest.registered_nodes["ethereal:orange_tree_sapling"]
-    and minetest.registered_nodes["ethereal:birch_sapling"]
-    and minetest.registered_nodes["ethereal:sakura_sapling"]
-    and minetest.registered_nodes["ethereal:lemon_tree_sapling"]
-    and minetest.registered_nodes["ethereal:olive_tree_sapling"]
-    and minetest.registered_nodes["ethereal:bamboo_sprout"] then
-
-    table.insert(saplings, "ethereal:willow_sapling")
-    table.insert(saplings, "ethereal:yellow_tree_sapling")
-    table.insert(saplings, "ethereal:big_tree_sapling")
-    table.insert(saplings, "ethereal:banana_tree_sapling")
-    table.insert(saplings, "ethereal:frost_tree_sapling")
-    table.insert(saplings, "ethereal:mushroom_sapling")
-    table.insert(saplings, "ethereal:palm_sapling")
-    table.insert(saplings, "ethereal:giant_redwood_sapling")
-    table.insert(saplings, "ethereal:redwood_sapling")
-    table.insert(saplings, "ethereal:orange_tree_sapling")
-    table.insert(saplings, "ethereal:birch_sapling")
-    table.insert(saplings, "ethereal:sakura_sapling")
-    table.insert(saplings, "ethereal:lemon_tree_sapling")
-    table.insert(saplings, "ethereal:olive_tree_sapling")
-    table.insert(saplings, "ethereal:bamboo_sprout")
+for _,k in pairs(list) do
+    if minetest.get_modpath("ethereal") and minetest.registered_nodes[k] then
+        table.insert(saplings, k)
+    end
 end
