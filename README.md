@@ -6,13 +6,13 @@ Built for the [Minetest Engine](https://www.minetest.net), with support for 10+ 
 ## Installation
 
 - Unzip the archive, rename the folder to `instant_sapling_growth` and
-place it in .. minetest/mods/
+place it in `.. minetest/mods/`
 
 - GNU/Linux: If you use a system-wide installation place
-    it in ~/.minetest/mods/.
+    it in `~/.minetest/mods/`.
 
 - If you only want this to be used in a single world, place
-    the folder in .. worldmods/ in your world directory.
+    the folder in `.. worldmods/` in your world directory.
 
 For further information or help, see:\
 <https://wiki.minetest.net/Installing_Mods>
