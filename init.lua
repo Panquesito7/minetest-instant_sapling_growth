@@ -20,6 +20,7 @@
 
 local modname = minetest.get_current_modname()
 local modpath = minetest.get_modpath(modname)
+local S = minetest.get_translator(modname)
 
 instant_sapling_growth = {
     saplings = { }
@@ -30,7 +31,7 @@ instant_sapling_growth = {
 ------------------
 
 minetest.register_privilege("sapling_growth", {
-		description = "Allows the player to instantly grow a sapling when placed",
+		description = S("Allows the player to instantly grow a sapling when placed."),
 		give_to_singleplayer = true,
 		give_to_admin = false
 })
