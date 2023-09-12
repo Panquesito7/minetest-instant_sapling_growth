@@ -1,5 +1,7 @@
 # Instant Sapling Growth 🌳
 
+[![luacheck](https://github.com/Panquesito7/minetest-instant_sapling_growth/actions/workflows/luacheck.yml/badge.svg)](https://github.com/Panquesito7/minetest-instant_sapling_growth/actions/workflows/luacheck.yml)
+
 A mod/tool that instantly grows a sapling when placed.\
 Built for the [Minetest Engine](https://www.minetest.net), with support for 10+ sapling mods.
 
