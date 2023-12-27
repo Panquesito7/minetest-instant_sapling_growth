@@ -52,6 +52,7 @@ dofile(modpath .. "/plantlife.lua")     -- Plantlife
 ----------------------
 
 -- `default.can_grow`, but can be configured to prevent light limitations or the need for the correct soil.
+-- https://github.com/minetest/minetest_game/blob/HEAD/mods/default/trees.lua#L14
 local function can_grow(pos)
 	local node_under = minetest.get_node_or_nil({x = pos.x, y = pos.y - 1, z = pos.z})
 	if not node_under then
@@ -75,6 +76,7 @@ local function can_grow(pos)
 end
 
 -- `default.grow_sapling`, but modified to support other tree mods, such as `maple`.
+-- https://github.com/minetest/minetest_game/blob/HEAD/mods/default/trees.lua#L545
 local function grow_sapling(pos)
     local node = minetest.get_node(pos)
     local mod_name = string.split(node.name, ":")[1]
