@@ -1,5 +1,5 @@
 --[[
-    Immediately fully-grows any sapling placed by the player, built for Minetest.
+    Instantly grows a sapling when placed. Built for the Minetest Engine.
 
     Copyright (C) 2023 David Leal (halfpacho@gmail.com)
     Copyright (C) Various other Minetest developers/contributors
@@ -109,14 +109,12 @@ local function grow_sapling(pos)
         if not can_grow(pos) then return end
 
         -- Taken from the `bushes_classic` mod when a bush grows (slightly modified). Thanks!
+        -- https://github.com/mt-mods/plantlife_modpack/blob/HEAD/bushes_classic/nodes.lua#L131-L141
 		local meta = minetest.get_meta(pos)
 		local bush_name = meta:get_string("bush_type")
 
         if bush_name and bush_name ~= "" then
-			local dirtpos = vector.new(pos.x, pos.y - 1, pos.z)
-			local dirt = minetest.get_node(dirtpos)
-
-			if dirt.name == "farming:soil_wet" or math.random(1,3) == 1 then
+			if math.random(1,3) == 1 then
 				minetest.swap_node(pos, { name = "bushes:" .. bush_name .. "_bush" })
             else
                 minetest.swap_node(pos, { name = "bushes:fruitless_bush" })
@@ -177,6 +175,7 @@ local function grow_sapling(pos)
     -- More Trees.
     elseif minetest.get_modpath("moretrees") and string.find(node.name, "moretrees") then
         -- Taken and slightly edited from the More Trees mod. Thanks!
+        -- https://github.com/mt-mods/moretrees/blob/HEAD/node_defs.lua#L458-L466
         if not can_grow(pos) then return end
 
         local treename = string.split(node.name, ":")[2]

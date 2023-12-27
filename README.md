@@ -22,7 +22,7 @@ For further information or help, see:\
 ## Supported sapling mods
 
 We support a variety of mods and modpacks to ensure all of those work properly with this mod.\
-This can be very useful in case you need saplings to instantly grow for buildings and such.
+This can be very useful in case you need saplings to instantly grow for buildings.
 
 - Full [Cool Trees](https://content.minetest.net/packages/runs/cool_trees/) modpack support.
 - [Mahogany](https://content.minetest.net/packages/runs/mahogany/) mod support.
@@ -44,6 +44,6 @@ These settings can be customized by modifying [`minetest.conf`](https://wiki.min
 This mod has been fully tested with Minetest 5.7.0 (the current latest version).\
 However, the mod should work as expected in Minetest 5.0.0+.
 
-## License/legal
+## License
 
-Refer to [`LICENSE.md`](LICENSE.md) for more information.
+Refer to [`LICENSE.md`](LICENSE.md) for full information.
