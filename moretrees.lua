@@ -1,7 +1,7 @@
 --[[
-    Support for the More Trees mod.
+    Support for the More Trees! mod.
 
-    Copyright (C) 2023 David Leal (halfpacho@gmail.com)
+    Copyright (C) 2023-2024 David Leal (halfpacho@gmail.com)
     Copyright (C) Various other Minetest developers/contributors
 
     This program is free software: you can redistribute it and/or modify

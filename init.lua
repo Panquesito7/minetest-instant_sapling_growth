@@ -1,7 +1,7 @@
 --[[
     Instantly grows a sapling when placed. Built for the Minetest Engine.
 
-    Copyright (C) 2023 David Leal (halfpacho@gmail.com)
+    Copyright (C) 2023-2024 David Leal (halfpacho@gmail.com)
     Copyright (C) Various other Minetest developers/contributors
 
     This program is free software: you can redistribute it and/or modify
@@ -31,9 +31,9 @@ instant_sapling_growth = {
 ------------------
 
 minetest.register_privilege("sapling_growth", {
-		description = S("Allows the player to instantly grow a sapling when placed."),
-		give_to_singleplayer = true,
-		give_to_admin = false
+    description = S("Allows the player to instantly grow a sapling when placed."),
+    give_to_singleplayer = false,
+    give_to_admin = false
 })
 
 ----------------------
@@ -62,15 +62,14 @@ local function can_grow(pos)
     local grow_everywhere = minetest.settings:get_bool("instant_sapling_growth.grow_everywhere")
     local light_limitations = minetest.settings:get_bool("instant_sapling_growth.light_limitations")
 
-	if grow_everywhere
-        and minetest.get_item_group(node_under.name, "soil") == 0 then
+    if minetest.get_item_group(node_under.name, "soil") == 0 and grow_everywhere ~= true then
 		return false
 	end
 
 	local light_level = minetest.get_node_light(pos)
-	if light_limitations and not (light_level or light_level < 13) then
-		return false
-	end
+    if (not light_level or light_level < 13) and (light_limitations or light_limitations == nil) then
+        return false
+    end
 
 	return true
 end
@@ -80,6 +79,8 @@ end
 local function grow_sapling(pos)
     local node = minetest.get_node(pos)
     local mod_name = string.split(node.name, ":")[1]
+
+    if node == nil then return end
 
     -- Maple Tree.
     if minetest.get_modpath("maple") and string.find(node.name, "maple") then
@@ -193,9 +194,16 @@ local function grow_sapling(pos)
                 minetest.spawn_tree(pos, moretrees["spawn_" .. treename .. "_object"])
             end
         end
+    -- Default saplings.
     elseif minetest.get_modpath("default") and mod_name == "default" then
         if not can_grow(pos) then return end
-        default.grow_sapling(pos)
+        local def = default and default.sapling_growth_defs[node.name]
+
+        if def and def.grow then
+            def.grow(pos)
+        else
+            default.grow_sapling(pos)
+        end
     else -- Cool Trees.
         if not can_grow(pos) then return end
 
@@ -214,6 +222,8 @@ local function grow_sapling(pos)
         minetest.remove_node(pos)
         minetest.place_schematic(vector.new(pos.x, pos.y - 1, pos.z), mod_name, "0", nil, true, "place_center_x, place_center_z")
     end
+
+    minetest.log("action", "[INSTANT SAPLING GROWTH] Growing sapling " .. node.name .. " at " .. minetest.pos_to_string(pos))
 end
 
 -- Taken and slightly modified from from cornernote's
@@ -224,15 +234,15 @@ minetest.register_on_mods_loaded(function()
         local old_after_place_node = minetest.registered_nodes[node].after_place_node
 
         minetest.override_item(node, {
-            after_place_node = function(pos, placer, itemstack)
+            after_place_node = function(pos, placer, _)
                 -- When placed, bushes are normally converted to a fruitless bush.
                 --
                 -- However, if the bush is not in growing conditions, we must turn it back to a
                 -- fruitless bush and not place the bush with its fruit.
-                if (string.find(node, "bushes") and not can_grow(pos))
-					or (minetest.check_player_privs(placer:get_player_name(), { sapling_growth = false })) then
+                if not minetest.check_player_privs(placer:get_player_name(), { sapling_growth = true }) or
+                    (string.find(node, "bushes") and not can_grow(pos)) then
 
-                    return old_after_place_node(pos, placer, itemstack)
+                    return old_after_place_node
                 end
 
                 -- Check if we have space to make a tree.
@@ -244,9 +254,13 @@ minetest.register_on_mods_loaded(function()
                         minetest.log("info", "[INSTANT SAPLING GROWTH] Not enough space to grow the `" .. node .. "` sapling.")
                         return
                     end
+
+                    if minetest.is_protected(pos, placer:get_player_name()) then
+                        return minetest.record_protection_violation(pos, placer:get_player_name())
+                    end
+
                     pos.y = pos.y - dy
                 end
-
                 -- Grow the given sapling.
                 grow_sapling(pos)
             end,

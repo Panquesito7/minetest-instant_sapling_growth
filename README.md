@@ -37,11 +37,11 @@ If you'd like to see another mod being added, feel free to [create an issue](htt
 These settings can be customized by modifying [`minetest.conf`](https://wiki.minetest.net/Minetest.conf) or directly in the Minetest settings.
 
 - `instant_sapling_growth.grow_everywhere`: Whether to grow the sapling everywhere or on proper soil only (disabled by default).
-- `instant_sapling_growth.light_limitations`: Whether will saplings grow only in the daytime or not (enabled by default).
+- `instant_sapling_growth.light_limitations`: Whether the saplings grow only in daytime or not (enabled by default).
 
 ## Required Minetest version
 
-This mod has been fully tested with Minetest 5.7.0 (the current latest version).\
+This mod has been fully tested with Minetest 5.8.0 (the current latest version).\
 However, the mod should work as expected in Minetest 5.0.0+.
 
 ## License
